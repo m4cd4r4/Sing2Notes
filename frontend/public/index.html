@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melody Transcriber</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <div id="app-container">
+        <header>
+            <h1>Melody Transcriber</h1>
+            <div id="auth-container">
+                <!-- Authentication components will be inserted here -->
+            </div>
+        </header>
+        
+        <main>
+            <section id="recorder-section">
+                <div id="record-button-container">
+                    <button id="record-button" aria-label="Record">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <p id="recording-status">Click to record</p>
+                </div>
+                
+                <div id="frequency-display-container">
+                    <h2>Frequency Visualization</h2>
+                    <canvas id="frequency-display"></canvas>
+                </div>
+            </section>
+            
+            <section id="results-section">
+                <div id="tabs">
+                    <button class="tab-button active" data-tab="simple-notes">Simple Notes</button>
+                    <button class="tab-button" data-tab="complex-chords">Complex Chords</button>
+                    <button class="tab-button" data-tab="sheet-music">Sheet Music</button>
+                </div>
+                
+                <div id="tab-content">
+                    <div class="tab-pane active" id="simple-notes">
+                        <h3>Simple Notes (C, D, E, F, G, A, B)</h3>
+                        <div id="simple-notes-display"></div>
+                    </div>
+                    
+                    <div class="tab-pane" id="complex-chords">
+                        <h3>Complex Chords (C Major 7, etc.)</h3>
+                        <div id="complex-chords-display"></div>
+                    </div>
+                    
+                    <div class="tab-pane" id="sheet-music">
+                        <h3>Sheet Music Notation</h3>
+                        <div id="sheet-music-display"></div>
+                    </div>
+                </div>
+                
+                <div id="save-controls">
+                    <input type="text" id="recording-name" placeholder="Name your recording">
+                    <button id="save-button" disabled>Save Recording</button>
+                </div>
+            </section>
+            
+            <section id="saved-recordings-section" class="hidden">
+                <h2>Your Saved Recordings</h2>
+                <div id="saved-recordings-list"></div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Melody Transcriber</p>
+        </footer>
+    </div>
+    
+    <script src="/scripts/bundle.js"></script>
+</body>
+</html>
