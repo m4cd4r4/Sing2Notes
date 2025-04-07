@@ -1,115 +1,152 @@
-# Sing2Notes - Melody Transcription App
+# Sing2Notes
 
-Sing2Notes is a web application that transcribes vocal melodies into musical notation. Users can record their singing or humming, and the app will automatically convert it to simple notes, complex chords, and sheet music notation.
+![Sing2Notes Logo](https://via.placeholder.com/800x200?text=Sing2Notes)
 
-## Features
+Sing2Notes is a web application that converts singing or humming to musical notation. With a simple recording interface, it transcribes melodies into simple notation, chord progressions, and professional sheet music.
 
-- **Real-time audio recording** with visual frequency display
-- **Automated music transcription**:
-  - Simple note display (C, D, E, F, G, A, B)
-  - Advanced chord detection (C Major 7, etc.)
-  - Sheet music notation
-- **User accounts** to save and manage recordings
-- **Downloadable sheet music** for saved recordings
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-## Tech Stack
+## ✨ Features
 
-### Frontend
-- Vanilla JavaScript (ES6+)
-- Web Audio API for recording and analysis
-- VexFlow for sheet music rendering
+- 🎤 **Record & Transcribe**: Capture vocal input through your microphone
+- 🎵 **Multiple Notation Formats**:
+  - Basic note names (C, D, E, F, G, A, B)
+  - Complex chord notation (C Major 7, etc.)
+  - Full sheet music with standard notation
+- 📊 **Real-time Frequency Analysis**: Visualize your voice as you sing
+- 🔐 **User Accounts**: Save, manage, and revisit your transcriptions
+- 📱 **Responsive Design**: Works on desktop, tablet, and mobile devices
+- 🖨️ **Export Options**: Download your music as PDF sheet music
 
-### Backend
-- Node.js with Express
-- MongoDB for data storage
-- JWT for authentication
-- Multer for file uploads
+## 🖥️ Demo
 
-## Getting Started
+![Application Demo](https://via.placeholder.com/800x450?text=Sing2Notes+Demo)
+
+## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js (v14 or higher)
 - MongoDB
 - npm or yarn
 
 ### Installation
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/m4cd4r4/Sing2Notes.git
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/Sing2Notes.git
    cd Sing2Notes
    ```
 
-2. Install dependencies:
-   ```
-   # Install backend dependencies
+2. **Set up backend**
+   ```bash
    cd backend
    npm install
+   # Create .env file (see .env.example for required variables)
+   cp .env.example .env
+   # Edit .env with your MongoDB URI and JWT secret
+   ```
 
-   # Install frontend dependencies
+3. **Set up frontend**
+   ```bash
    cd ../frontend
    npm install
    ```
 
-3. Configure environment variables:
-   - Copy `.env.example` to `.env` in the backend directory
-   - Update the MongoDB connection string and JWT secret
-
-4. Run the application:
-   ```
-   # Start backend server (from backend directory)
+4. **Start the development servers**
+   ```bash
+   # Terminal 1 - Backend
+   cd backend
    npm run dev
 
-   # Start frontend development server (from frontend directory)
+   # Terminal 2 - Frontend
+   cd frontend
    npm start
    ```
 
-5. Access the application at `http://localhost:3000`
+5. **Open your browser** and navigate to `http://localhost:3000`
 
-### Using Docker (alternative)
+### Using Docker
 
-1. Make sure Docker and Docker Compose are installed
+```bash
+# Start all services
+docker-compose up -d
 
-2. Run the application:
-   ```
-   docker-compose up
-   ```
-
-3. Access the application at `http://localhost:3000`
-
-## Usage
-
-1. Click the microphone button to start recording your melody
-2. Sing or hum the melody you want to transcribe
-3. Click the button again to stop recording
-4. View the transcription results in the three tabs:
-   - Simple Notes
-   - Complex Chords
-   - Sheet Music
-5. If logged in, you can save the recording and access it later
-
-## Project Structure
-
-```
-melody-transcriber/
-├── frontend/               # Frontend application
-│   ├── public/             # Static assets
-│   └── src/                # Source code
-│       ├── components/     # UI components
-│       ├── services/       # API and audio processing
-│       └── styles/         # CSS styles
-├── backend/                # Backend API
-│   ├── controllers/        # Request handlers
-│   ├── models/             # MongoDB models
-│   ├── routes/             # API routes
-│   └── middleware/         # Custom middleware
-└── docker-compose.yml      # Docker configuration
+# Access at http://localhost:3000
 ```
 
-## License
+## 🧠 How It Works
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Sing2Notes uses advanced audio processing algorithms to analyze vocal input:
 
-## Contributing
+1. **Recording**: Web Audio API captures microphone input
+2. **Frequency Analysis**: Identifies fundamental frequencies using autocorrelation
+3. **Pitch Detection**: Maps frequencies to musical notes
+4. **Chord Recognition**: Identifies chord patterns from detected notes
+5. **Notation Generation**: Renders sheet music using VexFlow
+
+## 🔧 Technology Stack
+
+### Frontend
+- Vanilla JavaScript (ES6+)
+- Web Audio API for audio recording and analysis
+- VexFlow for sheet music rendering
+
+### Backend
+- Node.js with Express
+- MongoDB for data storage
+- JWT for authentication
+- Multer for file upload handling
+
+## 📁 Project Structure
+
+```
+Sing2Notes/
+├── frontend/
+│   ├── public/
+│   └── src/
+│       ├── components/  # UI components
+│       ├── services/    # Audio processing & API communication
+│       └── styles/      # CSS styles
+├── backend/
+│   ├── controllers/     # Route handlers
+│   ├── models/          # Database schemas
+│   ├── routes/          # API endpoints
+│   └── middleware/      # Custom middleware
+└── docker-compose.yml   # Docker configuration
+```
+
+## 🛣️ Roadmap
+
+- [ ] Improve pitch detection for polyphonic (multi-note) input
+- [ ] Add instrument selection for different sound profiles
+- [ ] Implement social sharing features
+- [ ] Support MIDI export format
+- [ ] Create mobile application versions
+
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please make sure to update tests as appropriate and adhere to the existing coding style.
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📧 Contact
+
+Project Link: [https://github.com/your-username/Sing2Notes](https://github.com/your-username/Sing2Notes)
+
+## 🙏 Acknowledgments
+
+- [VexFlow](https://github.com/0xfe/vexflow) for music notation rendering
+- [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) for audio processing
+- All contributors and supporters of the project
