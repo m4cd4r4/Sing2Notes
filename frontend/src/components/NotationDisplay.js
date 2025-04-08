@@ -1,3 +1,5 @@
+import Vex from 'vexflow'; // Import VexFlow main object
+
 /**
  * NotationDisplay.js
  * Renders musical notation using VexFlow
@@ -10,39 +12,12 @@ class NotationDisplay {
         this.width = 0;           // Canvas width
         this.height = 0;          // Canvas height
         this.sheetMusicData = null; // Parsed sheet music data
-        
-        // Load VexFlow from CDN
-        this.loadVexFlow().then(() => {
-            this.initializeRenderer();
-        });
+
+        // Initialize renderer directly now that VexFlow is imported
+        this.initializeRenderer();
     }
-    
-    /**
-     * Load VexFlow library from CDN
-     */
-    async loadVexFlow() {
-        return new Promise((resolve, reject) => {
-            if (window.Vex) {
-                resolve(window.Vex);
-                return;
-            }
-            
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/vexflow/4.1.0/vexflow.min.js';
-            script.async = true;
-            
-            script.onload = () => {
-                resolve(window.Vex);
-            };
-            
-            script.onerror = () => {
-                this.displayError('Failed to load notation rendering library');
-                reject(new Error('Failed to load VexFlow'));
-            };
-            
-            document.head.appendChild(script);
-        });
-    }
+
+    // Removed the async loadVexFlow() method as it's no longer needed
     
     /**
      * Initialize the VexFlow renderer
@@ -61,12 +36,12 @@ class NotationDisplay {
             this.width = this.container.clientWidth;
             this.height = 300; // Fixed height for now
             
-            // Create VexFlow renderer
+            // Create VexFlow renderer using the imported Vex object
             this.vf = new Vex.Flow.Renderer(
                 rendererDiv,
                 Vex.Flow.Renderer.Backends.SVG
             );
-            
+
             // Configure renderer
             this.vf.resize(this.width, this.height);
             this.context = this.vf.getContext();
@@ -89,9 +64,9 @@ class NotationDisplay {
             // Clear the context
             this.context.clear();
             
-            // Create a stave
+            // Create a stave using the imported Vex object
             const stave = new Vex.Flow.Stave(10, 40, this.width - 20);
-            
+
             // Add clef and time signature
             stave.addClef('treble').addTimeSignature('4/4');
             
@@ -190,9 +165,9 @@ class NotationDisplay {
      * @param {String} clef - Clef to use ('treble', 'bass', etc.)
      */
     drawMeasure(x, y, width, measureNotes, isFirstMeasure, clef = 'treble') {
-        // Create a stave
+        // Create a stave using the imported Vex object
         const stave = new Vex.Flow.Stave(x, y, width);
-        
+
         // Add clef and time signature to first measure only
         if (isFirstMeasure) {
             stave.addClef(clef).addTimeSignature('4/4');
@@ -206,16 +181,16 @@ class NotationDisplay {
         
         // Convert notes to VexFlow format
         const vfNotes = this.createVexFlowNotes(measureNotes);
-        
-        // Create a voice and add notes to it
+
+        // Create a voice and add notes to it using the imported Vex object
         const voice = new Vex.Flow.Voice({
             num_beats: 4,
             beat_value: 4
         }).setMode(Vex.Flow.Voice.Mode.SOFT);
-        
+
         voice.addTickables(vfNotes);
-        
-        // Format the notes to fit in the stave
+
+        // Format the notes to fit in the stave using the imported Vex object
         new Vex.Flow.Formatter()
             .joinVoices([voice])
             .format([voice], width - 50);
@@ -234,15 +209,15 @@ class NotationDisplay {
             // Convert our note data to VexFlow format
             const noteName = note.pitch + '/' + note.octave;
             const duration = note.duration || 'q'; // Default to quarter note
-            
-            // Create a StaveNote
+
+            // Create a StaveNote using the imported Vex object
             const staveNote = new Vex.Flow.StaveNote({
                 clef: 'treble',
                 keys: [noteName],
                 duration: this.convertDuration(duration)
             });
             
-            // Add accidental if needed
+            // Add accidental if needed using the imported Vex object
             if (note.pitch.includes('#')) {
                 staveNote.addAccidental(0, new Vex.Flow.Accidental('#'));
             } else if (note.pitch.includes('b')) {
